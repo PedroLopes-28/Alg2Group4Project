@@ -1,35 +1,51 @@
-
 #ifndef BENCHMARK_H
-
-typedef struct heap heap;
-
-//gera um vetor de int com numeros aleatórios
-int* geraAleatorios(int tam, int semente);
-
-//gera um vetor de int com numeros quase ordenados
-int* geraQuaseOrdenados(int tam, int porcentagem);
-
-//gera um vetor com os dados ordenados
-int* geraOrdenados(int tam, int ordem);
-
-//usa o método selectionSort para ordenar o vetor
-void selectionSort(int *vet, int tam);
-
-//usa o método insertionSort para ordenar o vetor
-void insertionSort(int* vet, int tam);
-
-//usa o método mergeSort para ordenar o vetor
-void mergeSort(int *vet, int inicio, int fim);
-void merge(int *vet, int inicio, int meio, int fim);
-
-//usa o método quicksort para ordenar o vetor
-void quickSort(int *vet, int inicio, int fim);
-int particiona(int *vet, int inicio, int fim);
-
-//usa o método de heapSort para ordenar o vetor
-void heapSort(heap *h);
-void heapify(heap *h, int atual);
-
 #define BENCHMARK_H
 
-#endif //BENCHMARK_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
+/* Estrutura para representar um heap (usado no heapSort) */
+typedef struct heap {
+    int *vet;  // Vetor que representa o heap
+    int tam;   // Tamanho atual do heap
+} heap;
+
+/* Gera um vetor com números aleatórios entre 0 e RANGE */
+int* geraAleatorios(int tam, int semente);
+
+/* Gera um vetor quase ordenado, com base na porcentagem de desordem desejada */
+int* geraQuaseOrdenados(int tam, int porcentagem);
+
+/* Gera um vetor ordenado em ordem crescente (ordem = 0) ou decrescente (ordem = 1) */
+int* geraOrdenados(int tam, int ordem);
+
+/* Ordena o vetor usando o algoritmo Selection Sort e conta comparações e trocas */
+void selectionSort(int *vet, int tam, int *comparacao, int *troca);
+
+/* Ordena o vetor usando o algoritmo Insertion Sort e conta comparações e trocas */
+void insertionSort(int *vet, int tam, int *comparacao, int *troca);
+
+/* Ordena o vetor usando o algoritmo Merge Sort e conta comparações e trocas */
+void mergeSort(int *vet, int inicio, int fim, int *comparacao, int *troca);
+
+/* Função auxiliar do Merge Sort para mesclar duas partes do vetor */
+void merge(int *vet, int inicio, int meio, int fim, int *comparacao, int *troca);
+
+/* Ordena o vetor usando o algoritmo Quick Sort e conta comparações e trocas */
+void quickSort(int *vet, int inicio, int fim, int *comparacao, int *troca);
+
+/* Função auxiliar do Quick Sort que particiona o vetor */
+int particiona(int *vet, int inicio, int fim, int *comparacao, int *troca);
+
+/* Ordena o vetor representado pela struct heap usando Heap Sort */
+void heapSort(heap *h, int *comparacao, int *troca);
+
+/* Função auxiliar do Heap Sort para manter a propriedade do heap */
+void heapify(heap *h, int atual, int *comparacao, int *troca);
+
+/* Calcula o tempo de execução entre dois pontos do clock em milissegundos */
+long timediff(clock_t t1, clock_t t2);
+
+#endif // BENCHMARK_H
