@@ -70,7 +70,7 @@ int main() {
     memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
     comparacao = troca = 0;
     clock_gettime(CLOCK_MONOTONIC, &ini);
-    merge(vetTemp, 0, tam - 1, &comparacao, &troca);
+    mergeSort(vetTemp, 0, tam - 1, &comparacao, &troca);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
     printf("MergeSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
@@ -80,22 +80,31 @@ int main() {
     vetTemp = malloc(sizeof(int) * tam);
     memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
     clock_gettime(CLOCK_MONOTONIC, &ini);
-    quickSort(vetTemp, 0, tam - 1);
+    quickSort(vetTemp, 0, tam - 1, &comparacao, &troca);
     clock_gettime(CLOCK_MONOTONIC, &fim);
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
     printf("QuickSort -> Tempo: %lld ns | Comparações: não aplicável | Trocas: não aplicável\n", duracao);
     free(vetTemp);
 
     // Heap Sort
-    vetTemp = malloc(sizeof(int) * tam);
-    memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
+    vetTemp = malloc(sizeof(int) * (tam + 1)); // +1 porque heap começa em 1
+    vetTemp[0] = 0; // não usado, só para ajustar o índice
+
+    // Copia vetorOriginal para vetTemp começando de 1
+    for (int i = 0; i < tam; i++) {
+        vetTemp[i + 1] = vetorOriginal[i];
+    }
+
     comparacao = troca = 0;
     clock_gettime(CLOCK_MONOTONIC, &ini);
-    heapSort((heap*)vetTemp, &comparacao, &troca); // struct heap deve ser usada corretamente no .c
+    heapSort(vetTemp, tam, &comparacao, &troca);
     clock_gettime(CLOCK_MONOTONIC, &fim);
+
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
     printf("HeapSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
+
     free(vetTemp);
+
 
     free(vetorOriginal);
     return 0;

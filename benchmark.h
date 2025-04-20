@@ -7,10 +7,7 @@
 #include <math.h>
 
 /* Estrutura para representar um heap (usado no heapSort) */
-typedef struct heap {
-    int *vet;  // Vetor que representa o heap
-    int tam;   // Tamanho atual do heap
-} heap;
+typedef struct heap heap;
 
 /* Gera um vetor com números aleatórios entre 0 e RANGE */
 int* geraAleatorios(int tam, int semente);
@@ -40,10 +37,10 @@ void quickSort(int *vet, int inicio, int fim, int *comparacao, int *troca);
 int particiona(int *vet, int inicio, int fim, int *comparacao, int *troca);
 
 /* Ordena o vetor representado pela struct heap usando Heap Sort */
-void heapSort(heap *h, int *comparacao, int *troca);
+void heapSort(int *h, int tam, int *comparacao, int *troca);
 
 /* Função auxiliar do Heap Sort para manter a propriedade do heap */
-void heapify(heap *h, int atual, int *comparacao, int *troca);
+void heapify(int *h, int tail, int tam, int *comparacao, int *troca);
 
 /* Calcula o tempo de execução entre dois pontos do clock em milissegundos */
 long timediff(clock_t t1, clock_t t2);
