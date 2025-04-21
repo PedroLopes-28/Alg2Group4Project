@@ -8,6 +8,7 @@ int main() {
     int tam, tipoEntrada;
     int* vetorOriginal = NULL;
 
+    // Solicita ao usuário o tamanho do vetor
     printf("Digite o tamanho do vetor: ");
     scanf("%d", &tam);
 
@@ -16,6 +17,7 @@ int main() {
         return 1;
     }
 
+    // Menu para o usuário escolher o tipo de entrada
     printf("\nEscolha o tipo de entrada:\n");
     printf("1 - Aleatória\n");
     printf("2 - Quase ordenada\n");
@@ -23,89 +25,144 @@ int main() {
     printf("Opção: ");
     scanf("%d", &tipoEntrada);
 
+    // Gera o vetor de acordo com o tipo escolhido
     switch (tipoEntrada) {
         case 1:
-            vetorOriginal = geraAleatorios(tam, 42); // semente fixa
+            vetorOriginal = geraAleatorios(tam, 42); // Gera vetor aleatório
             break;
         case 2:
-            vetorOriginal = geraQuaseOrdenados(tam, 10); // 10% fora de ordem
+            vetorOriginal = geraQuaseOrdenados(tam, 10); // Vetor quase ordenado
             break;
         case 3:
-            vetorOriginal = geraOrdenados(tam, 1); // ordem crescente
+            vetorOriginal = geraOrdenados(tam, 0); // Vetor totalmente ordenado
             break;
         default:
             printf("Opção inválida.\n");
             return 1;
     }
 
-    int* vetTemp;
-    int comparacao, troca;
-    struct timespec ini, fim;
-    long long duracao;
+    // Imprime o vetor original gerado
+    for (int i = 0; i < tam; i++) {
+        printf("%d ", vetorOriginal[i]);
+    }
 
-    // Selection Sort
+    int *vetTemp;
+    int comparacao, troca;
+    struct timespec ini, fim; // Variáveis para medir o tempo
+    long long duracao;        // Duração em nanosegundos
+
+    // ---------------------- SELECTION SORT ----------------------
     vetTemp = malloc(sizeof(int) * tam);
-    memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
+    memcpy(vetTemp, vetorOriginal, sizeof(int) * tam); // Copia vetor original para vetTemp
     comparacao = troca = 0;
-    clock_gettime(CLOCK_MONOTONIC, &ini);
+
+
+    clock_gettime(CLOCK_MONOTONIC, &ini);//pega o tempo antes de iniciar a função de ordenação
     selectionSort(vetTemp, tam, &comparacao, &troca);
-    clock_gettime(CLOCK_MONOTONIC, &fim);
+    clock_gettime(CLOCK_MONOTONIC, &fim);//pega o tempo após de iniciar a função de ordenação
+
+
+    // Cálculo da duração
+    //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
+
+    // Imprime vetor ordenado
+    for (int i = 0; i < tam; i++) {
+        printf("%d ", vetTemp[i]);
+    }
+    // Imprime estatísticas
     printf("SelectionSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
-    // Insertion Sort
+    // ---------------------- INSERTION SORT ----------------------
     vetTemp = malloc(sizeof(int) * tam);
     memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
     comparacao = troca = 0;
-    clock_gettime(CLOCK_MONOTONIC, &ini);
+
+
+    clock_gettime(CLOCK_MONOTONIC, &ini);//pega o tempo antes de iniciar a função de ordenação
     insertionSort(vetTemp, tam, &comparacao, &troca);
-    clock_gettime(CLOCK_MONOTONIC, &fim);
+    clock_gettime(CLOCK_MONOTONIC, &fim);//pega o tempo após de iniciar a função de ordenação
+
+    // Cálculo da duração
+    //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
+
+    for (int i = 0; i < tam; i++) {
+        printf("%d ", vetTemp[i]);
+    }
     printf("InsertionSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
-    // Merge Sort
+    // ---------------------- MERGE SORT ----------------------
     vetTemp = malloc(sizeof(int) * tam);
     memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
     comparacao = troca = 0;
-    clock_gettime(CLOCK_MONOTONIC, &ini);
+
+
+    clock_gettime(CLOCK_MONOTONIC, &ini);//pega o tempo antes de iniciar a função de ordenação
     mergeSort(vetTemp, 0, tam - 1, &comparacao, &troca);
-    clock_gettime(CLOCK_MONOTONIC, &fim);
+    clock_gettime(CLOCK_MONOTONIC, &fim);//pega o tempo após de iniciar a função de ordenação
+
+    // Cálculo da duração
+    //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
+
+    for (int i = 0; i < tam; i++) {
+        printf("%d ", vetTemp[i]);
+    }
     printf("MergeSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
-    // Quick Sort
+    // ---------------------- QUICK SORT ----------------------
     vetTemp = malloc(sizeof(int) * tam);
     memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
-    clock_gettime(CLOCK_MONOTONIC, &ini);
+    comparacao = troca = 0;
+
+
+    clock_gettime(CLOCK_MONOTONIC, &ini);//pega o tempo antes de iniciar a função de ordenação
     quickSort(vetTemp, 0, tam - 1, &comparacao, &troca);
-    clock_gettime(CLOCK_MONOTONIC, &fim);
+    clock_gettime(CLOCK_MONOTONIC, &fim);//pega o tempo após de iniciar a função de ordenação
+
+    // Cálculo da duração
+    //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
-    printf("QuickSort -> Tempo: %lld ns | Comparações: não aplicável | Trocas: não aplicável\n", duracao);
+
+    for (int i = 0; i < tam; i++) {
+        printf("%d ", vetTemp[i]);
+    }
+    printf("QuickSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
-    // Heap Sort
-    vetTemp = malloc(sizeof(int) * (tam + 1)); // +1 porque heap começa em 1
-    vetTemp[0] = 0; // não usado, só para ajustar o índice
+    // ---------------------- HEAP SORT ----------------------
+    // Aqui, o vetor precisa começar do índice 1
+    vetTemp = malloc(sizeof(int) * (tam + 1));
+    vetTemp[0] = 0; // índice 0 não utilizado
 
-    // Copia vetorOriginal para vetTemp começando de 1
+    // Copia elementos do vetor original para vetTemp, começando da posição 1
     for (int i = 0; i < tam; i++) {
         vetTemp[i + 1] = vetorOriginal[i];
     }
-
     comparacao = troca = 0;
-    clock_gettime(CLOCK_MONOTONIC, &ini);
+
+
+    clock_gettime(CLOCK_MONOTONIC, &ini);//pega o tempo antes de iniciar a função de ordenação
     heapSort(vetTemp, tam, &comparacao, &troca);
-    clock_gettime(CLOCK_MONOTONIC, &fim);
+    clock_gettime(CLOCK_MONOTONIC, &fim);//pega o tempo após de iniciar a função de ordenação
 
+    // Cálculo da duração
+    //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
-    printf("HeapSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
 
+    // Imprime vetor ordenado (lembrando que começa no índice 1)
+    for (int i = 1; i <= tam; i++) {
+        printf("%d ", vetTemp[i]);
+    }
+    printf("HeapSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
-
+    // Libera memória alocada do vetor original
     free(vetorOriginal);
+
     return 0;
 }
