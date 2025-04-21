@@ -45,6 +45,7 @@ int main() {
     for (int i = 0; i < tam; i++) {
         printf("%d ", vetorOriginal[i]);
     }
+    printf("\n");
 
     int *vetTemp;
     int comparacao, troca;
@@ -70,6 +71,8 @@ int main() {
     for (int i = 0; i < tam; i++) {
         printf("%d ", vetTemp[i]);
     }
+    printf("\n");
+
     // Imprime estatísticas
     printf("SelectionSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
@@ -91,6 +94,8 @@ int main() {
     for (int i = 0; i < tam; i++) {
         printf("%d ", vetTemp[i]);
     }
+    printf("\n");
+
     printf("InsertionSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
@@ -111,6 +116,8 @@ int main() {
     for (int i = 0; i < tam; i++) {
         printf("%d ", vetTemp[i]);
     }
+    printf("\n");
+
     printf("MergeSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
@@ -131,6 +138,8 @@ int main() {
     for (int i = 0; i < tam; i++) {
         printf("%d ", vetTemp[i]);
     }
+    printf("\n");
+
     printf("QuickSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
@@ -158,8 +167,12 @@ int main() {
     for (int i = 1; i <= tam; i++) {
         printf("%d ", vetTemp[i]);
     }
+    printf("\n");
+
     printf("HeapSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
+
+    // -------------------------------------------------------
 
     // Libera memória alocada do vetor original
     free(vetorOriginal);
