@@ -31,19 +31,12 @@ int main() {
         // Gera o vetor de acordo com o tipo escolhido
         switch (tipoEntrada) {
             case 0:
-                int semente;
-                printf("Escolha uma semente para gerar o vetor: ");
-                scanf("%d",&semente);
-
-                vetorOriginal = geraAleatorios(tam, semente); // Gera vetor aleatório
+                
+                vetorOriginal = geraAleatorios(tam); // Gera vetor aleatório
                 printf("\nTipo de Entrada: Vetor Aleatório\n");
                 break;
             case 1:
-                int semente;
-                printf("Escolha uma semente para gerar o vetor: ");
-                scanf("%d",&semente);
-
-                vetorOriginal = geraQuaseOrdenados(tam, 10, 42); // Vetor quase ordenado
+                vetorOriginal = geraQuaseOrdenados(tam, 10); // Vetor quase ordenado
                 printf("\nTipo de Entrada: Vetor Quase Ordenado\n");
                 break;
             case 2:

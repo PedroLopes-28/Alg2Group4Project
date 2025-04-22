@@ -13,9 +13,9 @@ struct heap {
 
 
 /* Gera um vetor com números aleatórios entre 0 e RANGE */
-int *geraAleatorios(int tam, int semente){
+int *geraAleatorios(int tam){
     //Inicializa a semente geradora de números
-    srand(semente);
+    srand(time(NULL));
 
     //Alocação de memória
     int *vet = (int*) malloc(tam * sizeof(int));
@@ -56,12 +56,12 @@ int *geraOrdenados(int tam, int ordem){
 };
 
 /* Gera um vetor quase ordenado, com base na porcentagem de desordem desejada */
-int *geraQuaseOrdenados(int tam, int porcentagem, int semente){
+int *geraQuaseOrdenados(int tam, int porcentagem){
     //Define o número de trocas a serem feitas baseada na porcentagem indicada
     int numTrocas = (int)(tam * porcentagem / 100);
 
     //Inicializa a semente geradora de números com um valor padrão
-    srand(semente);
+    srand(time(NULL));
 
     //Gera vetor ordenado
     int *vet = geraOrdenados(tam, 0);

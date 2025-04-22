@@ -10,13 +10,13 @@
 typedef struct heap heap;
 
 /* Gera um vetor com números aleatórios entre 0 e RANGE */
-int* geraAleatorios(int tam, int semente);
+int* geraAleatorios(int tam);
 
 /* Gera um vetor ordenado em ordem crescente (ordem = 0) ou decrescente (ordem = 1) */
 int* geraOrdenados(int tam, int ordem);
 
 /* Gera um vetor quase ordenado, com base na porcentagem de desordem desejada */
-int* geraQuaseOrdenados(int tam, int porcentagem, int semente);
+int* geraQuaseOrdenados(int tam, int porcentagem);
 
 /* Ordena o vetor usando o algoritmo Selection Sort e conta comparações e trocas */
 void selectionSort(int *vet, int tam, int *comparacao, int *troca);
