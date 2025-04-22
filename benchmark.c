@@ -42,7 +42,7 @@ int *geraOrdenados(int tam, int ordem){
     }
 
     //Preenche o vetor com números
-    for(int i=0; i<tam; i++){
+    for(int i = 0; i < tam; i++){
         if(ordem == 0){
             //Adiciona números em ordem crescente
             vet[i] = i;
@@ -67,7 +67,7 @@ int *geraQuaseOrdenados(int tam, int porcentagem){
     int *vet = geraOrdenados(tam, 0);
 
     //Faz trocas aleatórias
-    for(int i = 0; i<numTrocas; i++){
+    for(int i = 0; i < numTrocas; i++){
         int a = rand() % tam;
         int b = rand() % tam;
         if(a != b){ //Não realiza a troca se for o mesmo elemento
@@ -92,7 +92,7 @@ void selectionSort(int *vet, int tam, int *comparacao, int *troca){
         menor = marcador+1;
 
         //Encontra o menor elemento do vetor desordenado
-        for(int i=marcador+1; i<tam; i++){
+        for(int i = marcador+1; i < tam; i++){
             //Aumenta o número de comparações a cada iteração
             (*comparacao)++;
             if(vet[menor] > vet[i]){
@@ -118,7 +118,7 @@ void selectionSort(int *vet, int tam, int *comparacao, int *troca){
 void insertionSort(int* vet, int tam, int *comparacao, int *troca){
     int aux, pos, posicaoEncontrada;
 
-    for(int i=1; i<tam; i++){
+    for(int i = 1; i < tam; i++){
         pos = i - 1;     // Posição anterior à atual
         aux = vet[i];    // Armazena o valor atual na variável aux
         posicaoEncontrada = 0; 
@@ -170,12 +170,12 @@ void merge(int *vet, int inicio, int meio, int fim, int *comparacao, int *troca)
     int *vet2 = (int*)malloc(v2 * sizeof(int));
     
     // Copia os elementos do primeiro vetor
-    for(int i=0; i<v1; i++){
+    for(int i = 0; i < v1; i++){
         vet1[i] = vet[inicio + i];
     }
     
     // Copia os elementos do segundo vetor
-    for(int i=0; i<v2; i++){
+    for(int i = 0; i < v2; i++){
         vet2[i] = vet[meio + 1 + i];
     }
 
@@ -308,7 +308,7 @@ void heapSort(int *h, int tam, int *comparacao, int *troca){
     heapMaximo(h, tam, comparacao, troca);
     
     // Realiza a ordenação
-    for(int i=tam; i >= 2; i--){
+    for(int i = tam; i >= 2; i--){
         // Move o maior elemento(raiz) para o final do vetor
          int var = h[i];
          h[i] = h[1];

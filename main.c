@@ -41,12 +41,6 @@ int main() {
             return 1;
     }
 
-    // Imprime o vetor original gerado
-    for (int i = 0; i < tam; i++) {
-        printf("%d ", vetorOriginal[i]);
-    }
-    printf("\n");
-
     int *vetTemp;
     int comparacao, troca;
     struct timespec ini, fim; // Variáveis para medir o tempo
@@ -67,12 +61,6 @@ int main() {
     //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-    // Imprime vetor ordenado
-    for (int i = 0; i < tam; i++) {
-        printf("%d ", vetTemp[i]);
-    }
-    printf("\n");
-
     // Imprime estatísticas
     printf("SelectionSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
@@ -91,11 +79,6 @@ int main() {
     //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-    for (int i = 0; i < tam; i++) {
-        printf("%d ", vetTemp[i]);
-    }
-    printf("\n");
-
     printf("InsertionSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
@@ -113,11 +96,6 @@ int main() {
     //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-    for (int i = 0; i < tam; i++) {
-        printf("%d ", vetTemp[i]);
-    }
-    printf("\n");
-
     printf("MergeSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
 
@@ -134,11 +112,6 @@ int main() {
     // Cálculo da duração
     //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
-
-    for (int i = 0; i < tam; i++) {
-        printf("%d ", vetTemp[i]);
-    }
-    printf("\n");
 
     printf("QuickSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);
@@ -162,12 +135,6 @@ int main() {
     // Cálculo da duração
     //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
     duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
-
-    // Imprime vetor ordenado (lembrando que começa no índice 1)
-    for (int i = 1; i <= tam; i++) {
-        printf("%d ", vetTemp[i]);
-    }
-    printf("\n");
 
     printf("HeapSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
     free(vetTemp);

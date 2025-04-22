@@ -45,7 +45,4 @@ void heapMaximo(int *h, int tam, int *comparacao, int *troca);
 /* Função auxiliar do Heap Sort para manter a propriedade do heap */
 void heapify(int *h, int tail, int tam, int *comparacao, int *troca);
 
-/* Calcula o tempo de execução entre dois pontos do clock em milissegundos */
-long timediff(clock_t t1, clock_t t2);
-
 #endif // BENCHMARK_H
