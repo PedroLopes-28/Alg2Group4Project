@@ -16,7 +16,7 @@ int* geraAleatorios(int tam, int semente);
 int* geraOrdenados(int tam, int ordem);
 
 /* Gera um vetor quase ordenado, com base na porcentagem de desordem desejada */
-int* geraQuaseOrdenados(int tam, int porcentagem);
+int* geraQuaseOrdenados(int tam, int porcentagem, int semente);
 
 /* Ordena o vetor usando o algoritmo Selection Sort e conta comparações e trocas */
 void selectionSort(int *vet, int tam, int *comparacao, int *troca);

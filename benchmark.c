@@ -56,12 +56,12 @@ int *geraOrdenados(int tam, int ordem){
 };
 
 /* Gera um vetor quase ordenado, com base na porcentagem de desordem desejada */
-int *geraQuaseOrdenados(int tam, int porcentagem){
+int *geraQuaseOrdenados(int tam, int porcentagem, int semente){
     //Define o número de trocas a serem feitas baseada na porcentagem indicada
     int numTrocas = (int)(tam * porcentagem / 100);
 
     //Inicializa a semente geradora de números com um valor padrão
-    srand(2);
+    srand(semente);
 
     //Gera vetor ordenado
     int *vet = geraOrdenados(tam, 0);
