@@ -102,6 +102,7 @@ int main() {
         if(tipoEntrada == 0 || tipoEntrada == 1){
             media = media/iteracoes;
             printf("Média de tempo: %lld ns\n", media);
+            media = 0;
         }
 
         // ---------------------- INSERTION SORT ----------------------
@@ -139,6 +140,7 @@ int main() {
         if(tipoEntrada == 0 || tipoEntrada == 1){
             media = media/iteracoes;
             printf("Média de tempo: %lld ns\n", media);
+            media = 0;
         }
 
         // ---------------------- MERGE SORT ----------------------
@@ -175,6 +177,7 @@ int main() {
         if(tipoEntrada == 0 || tipoEntrada == 1){
             media = media/iteracoes;
             printf("Média de tempo: %lld ns\n", media);
+            media = 0;
         }
 
         // ---------------------- QUICK SORT ----------------------
@@ -211,6 +214,7 @@ int main() {
         if(tipoEntrada == 0 || tipoEntrada == 1){
             media = media/iteracoes;
             printf("Média de tempo: %lld ns\n", media);
+            media = 0;
         }
 
         // ---------------------- HEAP SORT ----------------------
@@ -253,6 +257,7 @@ int main() {
         if(tipoEntrada == 0 || tipoEntrada == 1){
             media = media/iteracoes;
             printf("Média de tempo: %lld ns\n", media);
+            media = 0;
         }
 
         // -------------------------------------------------------
