@@ -21,7 +21,8 @@ int main() {
     printf("\nEscolha o tipo de entrada:\n");
     printf("1 - Aleatória\n");
     printf("2 - Quase ordenada\n");
-    printf("3 - Ordenada\n");
+    printf("3 - Ordenada Crescente\n");
+    printf("4 - Ordenada Decrescente\n");
     printf("Opção: ");
     scanf("%d", &tipoEntrada);
 
@@ -36,10 +37,15 @@ int main() {
         case 3:
             vetorOriginal = geraOrdenados(tam, 0); // Vetor totalmente ordenado
             break;
+        case 4:
+            vetorOriginal = geraOrdenados(tam, 1); // Vetor totalmente ordenado
+            break;
         default:
             printf("Opção inválida.\n");
             return 1;
     }
+
+    for(int i=0;i<tam;i++) printf("%d ",vetorOriginal[i]);
 
     int *vetTemp;
     int comparacao, troca;
