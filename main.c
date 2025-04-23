@@ -31,11 +31,11 @@ int main() {
         // Gera o vetor de acordo com o tipo escolhido
         switch (tipoEntrada) {
             case 0:
-                
-                vetorOriginal = geraAleatorios(tam); // Gera vetor aleatório
+                vetorOriginal = geraAleatorios(tam, 42); // Gera vetor aleatório
                 printf("\nTipo de Entrada: Vetor Aleatório\n");
                 break;
             case 1:
+                srand(time(NULL));
                 vetorOriginal = geraQuaseOrdenados(tam, 10); // Vetor quase ordenado
                 printf("\nTipo de Entrada: Vetor Quase Ordenado\n");
                 break;
@@ -96,7 +96,7 @@ int main() {
                 vetorOriginal = geraAleatorios(tam, i);
             }else if(tipoEntrada == 1){
                 free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10, i);
+                vetorOriginal = geraQuaseOrdenados(tam, 10);
             }
         }
 
@@ -134,7 +134,7 @@ int main() {
                 vetorOriginal = geraAleatorios(tam, i);
             }else if(tipoEntrada == 1){
                 free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10, i);
+                vetorOriginal = geraQuaseOrdenados(tam, 10);
             }
         }
 
@@ -171,7 +171,7 @@ int main() {
                 vetorOriginal = geraAleatorios(tam, i);
             }else if(tipoEntrada == 1){
                 free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10, i);
+                vetorOriginal = geraQuaseOrdenados(tam, 10);
             }
         }
 
@@ -208,7 +208,7 @@ int main() {
                 vetorOriginal = geraAleatorios(tam, i);
             }else if(tipoEntrada == 1){
                 free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10, i);
+                vetorOriginal = geraQuaseOrdenados(tam, 10);
             }
         }
 
@@ -251,7 +251,7 @@ int main() {
                 vetorOriginal = geraAleatorios(tam, i);
             }else if(tipoEntrada == 1){
                 free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10, i);
+                vetorOriginal = geraQuaseOrdenados(tam, 10);
             }
         }
 

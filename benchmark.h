@@ -10,7 +10,7 @@
 typedef struct heap heap;
 
 /* Gera um vetor com números aleatórios entre 0 e RANGE */
-int* geraAleatorios(int tam);
+int* geraAleatorios(int tam, int semente);
 
 /* Gera um vetor ordenado em ordem crescente (ordem = 0) ou decrescente (ordem = 1) */
 int* geraOrdenados(int tam, int ordem);
