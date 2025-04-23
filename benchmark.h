@@ -19,30 +19,30 @@ int* geraOrdenados(int tam, int ordem);
 int* geraQuaseOrdenados(int tam, int porcentagem);
 
 /* Ordena o vetor usando o algoritmo Selection Sort e conta comparações e trocas */
-void selectionSort(int *vet, int tam, int *comparacao, int *troca);
+void selectionSort(int *vet, int tam, long long *comparacao, long long *troca);
 
 /* Ordena o vetor usando o algoritmo Insertion Sort e conta comparações e trocas */
-void insertionSort(int *vet, int tam, int *comparacao, int *troca);
+void insertionSort(int *vet, int tam, long long *comparacao, long long *troca);
 
 /* Ordena o vetor usando o algoritmo Merge Sort e conta comparações e trocas */
-void mergeSort(int *vet, int inicio, int fim, int *comparacao, int *troca);
+void mergeSort(int *vet, int inicio, int fim, long long *comparacao, long long *troca);
 
 /* Função auxiliar do Merge Sort para mesclar duas partes do vetor */
-void merge(int *vet, int inicio, int meio, int fim, int *comparacao, int *troca);
+void merge(int *vet, int inicio, int meio, int fim, long long *comparacao, long long *troca);
 
 /* Ordena o vetor usando o algoritmo Quick Sort e conta comparações e trocas */
-void quickSort(int *vet, int inicio, int fim, int *comparacao, int *troca);
+void quickSort(int *vet, int inicio, int fim, long long *comparacao, long long *troca);
 
 /* Função auxiliar do Quick Sort que particiona o vetor */
-int particiona(int *vet, int inicio, int fim, int *comparacao, int *troca);
+int particiona(int *vet, int inicio, int fim, long long *comparacao, long long *troca);
 
 /* Ordena o vetor representado pela struct heap usando Heap Sort */
-void heapSort(int *h, int tam, int *comparacao, int *troca);
+void heapSort(int *h, int tam, long long *comparacao, long long *troca);
 
 // Constrói uma heap máxima a partir do vetor
-void heapMaximo(int *h, int tam, int *comparacao, int *troca);
+void heapMaximo(int *h, int tam, long long *comparacao, long long *troca);
 
 /* Função auxiliar do Heap Sort para manter a propriedade do heap */
-void heapify(int *h, int tail, int tam, int *comparacao, int *troca);
+void heapify(int *h, int tail, int tam, long long *comparacao, long long *troca);
 
 #endif // BENCHMARK_H

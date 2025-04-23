@@ -54,7 +54,7 @@ int main() {
 
         int iteracoes;            // Variável para definir quantas iterações serão feitas de cada algoritmo
         int *vetTemp;
-        int comparacao, troca;
+        long long comparacao, troca;
         struct timespec ini, fim; // Variáveis para medir o tempo
         long long duracao;        // Duração em nanosegundos
         long long media = 0;
@@ -83,7 +83,7 @@ int main() {
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
             // Imprime estatísticas
-            printf("SelectionSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
+            printf("SelectionSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
                 media += duracao;
@@ -121,7 +121,7 @@ int main() {
             //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-            printf("InsertionSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
+            printf("InsertionSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
                 media += duracao;
@@ -159,7 +159,7 @@ int main() {
             //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-            printf("MergeSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
+            printf("MergeSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
                 media += duracao;
@@ -196,7 +196,7 @@ int main() {
             //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-            printf("QuickSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
+            printf("QuickSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
                 media += duracao;
@@ -239,7 +239,7 @@ int main() {
             //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-            printf("HeapSort -> Tempo: %lld ns | Comparações: %d | Trocas: %d\n", duracao, comparacao, troca);
+            printf("HeapSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
                 media += duracao;
