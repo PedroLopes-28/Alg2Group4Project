@@ -79,7 +79,7 @@ int *geraQuaseOrdenados(int tam, int porcentagem){
 
 
 /* Ordena o vetor usando o algoritmo Selection Sort e conta comparações e trocas */
-void selectionSort(int *vet, int tam, int *comparacao, int *troca){
+void selectionSort(int *vet, int tam, long long *comparacao, long long *troca){
     int marcador = 0;
     int menor = 0;
     int aux;
@@ -112,7 +112,7 @@ void selectionSort(int *vet, int tam, int *comparacao, int *troca){
 };
 
 //usa o método insertionSort para ordenar o vetor
-void insertionSort(int* vet, int tam, int *comparacao, int *troca){
+void insertionSort(int* vet, int tam, long long *comparacao, long long *troca){
     int aux, pos, posicaoEncontrada;
 
     for(int i = 1; i < tam; i++){
@@ -145,7 +145,7 @@ void insertionSort(int* vet, int tam, int *comparacao, int *troca){
 }
 
 //usa o método mergeSort para ordenar o vetor
-void mergeSort(int *vet, int inicio, int fim, int *comparacao, int *troca){
+void mergeSort(int *vet, int inicio, int fim, long long *comparacao, long long *troca){
     int meio = (inicio+fim)/2;  // Divide o vetor ao meio
     
     // Verifica se ainda existe elementos a dividir
@@ -157,7 +157,7 @@ void mergeSort(int *vet, int inicio, int fim, int *comparacao, int *troca){
 }
 
 /* Função auxiliar do Merge Sort para mesclar duas partes do vetor */
-void merge(int *vet, int inicio, int meio, int fim, int *comparacao, int *troca){
+void merge(int *vet, int inicio, int meio, int fim, long long *comparacao, long long *troca){
     // Tamanho dos vetores 1 e 2
     int v1 = meio - inicio + 1;  
     int v2 = fim - meio;
@@ -215,7 +215,7 @@ void merge(int *vet, int inicio, int meio, int fim, int *comparacao, int *troca)
 }
 
 /* Ordena o vetor usando o algoritmo Quick Sort e conta comparações e trocas */
-void quickSort(int *vet, int inicio, int fim, int *comparacao, int *troca){
+void quickSort(int *vet, int inicio, int fim, long long *comparacao, long long *troca){
 
     if(inicio < fim){
         int pivo = particiona(vet, inicio, fim, comparacao, troca); //Define a posição do pivô
@@ -225,42 +225,38 @@ void quickSort(int *vet, int inicio, int fim, int *comparacao, int *troca){
 };
 
 /* Função auxiliar do Quick Sort que particiona o vetor */
-int particiona(int *vet, int inicio, int fim, int *comparacao, int *troca){
-    int pivo = vet[inicio]; // Define o pivô como o elemento inicial do vetor
-    int pos = inicio; // Inicializa a variável pos com o valor da posição inicial do vetor
+int particiona(int *vet, int inicio, int fim, long long *comparacao, long long *troca) {
+    // Escolhe um índice aleatório entre inicio e fim e troca com o início
+    int pivoIndex = inicio + rand() % (fim - inicio + 1);
+    
+    if (pivoIndex != inicio) {
+        int temp = vet[inicio];
+        vet[inicio] = vet[pivoIndex];
+        vet[pivoIndex] = temp;
+        (*troca)++; // Conta a troca do pivô
+    }
+
+    int pivo = vet[inicio]; // Agora o pivô é o novo primeiro elemento
+    int pos = inicio;
     int aux;
 
     for (int i = inicio + 1; i <= fim; i++) {
-        // Conta a comparação entre vet[i] e pivo
-        (*comparacao)++; 
+        (*comparacao)++;
 
         if (vet[i] < pivo) {
             pos++;
             if (i != pos) {
-                // Conta a troca entre vet[i] e vet[pos]
-                (*troca)++; 
-
-                // Coloca os elementos menores que o pivô à esquerda dos elementos maiores que ele à direita
                 aux = vet[i];
                 vet[i] = vet[pos];
                 vet[pos] = aux;
-                
+                (*troca)++;
             }
         }
     }
-
-    // Coloca o pivô na posição correta
-    aux = vet[inicio];
-    vet[inicio] = vet[pos];
-    vet[pos] = aux;
-    (*troca)++; // Conta a troca final do pivô com vet[pos]
-
-    // Retorna a posição do pivô
-    return pos;
 }
 
 // Coloca um certo valor em sua posição, seguindo as propriedades de heap
-void heapify(int *h, int tail, int tam, int *comparacao, int *troca){
+void heapify(int *h, int tail, int tam, long long *comparacao, long long *troca){
     // Determina os valores das posições dos filhos do tail
     int esquerda = 2*tail;
     int direita = 2*tail + 1;
@@ -292,7 +288,7 @@ void heapify(int *h, int tail, int tam, int *comparacao, int *troca){
 }
 
 // Constrói uma heap máxima a partir do vetor
-void heapMaximo(int *h, int tam, int *comparacao, int *troca){
+void heapMaximo(int *h, int tam, long long *comparacao, long long *troca){
     // Chama a função heapify para os nós internos, até o vetor seguir as propriedades da heap
     for(int i = tam/2; i >= 1; i--){
         heapify(h, i, tam, comparacao, troca);
@@ -300,7 +296,7 @@ void heapMaximo(int *h, int tam, int *comparacao, int *troca){
 }
 
 // Implementa o algoritmo heapSort para ordenar o vetor
-void heapSort(int *h, int tam, int *comparacao, int *troca){
+void heapSort(int *h, int tam, long long *comparacao, long long *troca){
     // Constrói uma heap máxima a partir do vetor, garantindo a propriedade de heap
     heapMaximo(h, tam, comparacao, troca);
     
