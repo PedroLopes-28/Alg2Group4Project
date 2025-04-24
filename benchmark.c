@@ -225,34 +225,33 @@ void quickSort(int *vet, int inicio, int fim, long long *comparacao, long long *
 };
 
 /* Função auxiliar do Quick Sort que particiona o vetor */
-int particiona(int *vet, int inicio, int fim, long long *comparacao, long long *troca) {
-    // Escolhe um índice aleatório entre inicio e fim e troca com o início
-    int pivoIndex = inicio + rand() % (fim - inicio + 1);
-    
-    if (pivoIndex != inicio) {
-        int temp = vet[inicio];
-        vet[inicio] = vet[pivoIndex];
-        vet[pivoIndex] = temp;
-        (*troca)++; // Conta a troca do pivô
-    }
-
-    int pivo = vet[inicio]; // Agora o pivô é o novo primeiro elemento
-    int pos = inicio;
+int particiona(int *vet, int inicio, int fim, long long *comparacao, long long *troca){
+    int pivo = vet[inicio]; // Define o pivô como o elemento inicial do vetor
+    int pos = inicio; // Inicializa a variável pos com o valor da posição inicial do vetor
     int aux;
 
     for (int i = inicio + 1; i <= fim; i++) {
-        (*comparacao)++;
-
+        (*comparacao)++; // Conta a comparação entre vet[i] e pivo
         if (vet[i] < pivo) {
             pos++;
             if (i != pos) {
+                // Coloca os elementos menores que o pivô à esquerda dos elementos maiores que ele à direita
                 aux = vet[i];
                 vet[i] = vet[pos];
                 vet[pos] = aux;
-                (*troca)++;
+                (*troca)++; // Conta a troca entre vet[i] e vet[pos]
             }
         }
     }
+
+    // Coloca o pivô na posição correta
+    aux = vet[inicio];
+    vet[inicio] = vet[pos];
+    vet[pos] = aux;
+    (*troca)++; // Conta a troca final do pivô com vet[pos]
+
+    // Retorna a posição do pivô
+    return pos;
 }
 
 // Coloca um certo valor em sua posição, seguindo as propriedades de heap

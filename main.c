@@ -7,6 +7,7 @@
 int main() {
     int tam, tipoEntrada, semente;
     int* vetorOriginal = NULL;
+    const char* nomesAlgoritmos[] = {"Selection Sort", "Insertion Sort", "Merge Sort", "Quick Sort", "Heap Sort"};
 
     // Solicita ao usuário o tamanho do vetor
     printf("Digite o tamanho do vetor: ");
@@ -17,35 +18,33 @@ int main() {
         return 1;
     }
 
-    // // Menu para o usuário escolher o tipo de entrada
-    // printf("\nEscolha o tipo de entrada:\n");
-    // printf("1 - Aleatória\n");
-    // printf("2 - Quase ordenada\n");
-    // printf("3 - Ordenada Crescente\n");
-    // printf("4 - Ordenada Decrescente\n");
-    // printf("Opção: ");
-    // scanf("%d", &tipoEntrada);
-
     for(tipoEntrada = 0; tipoEntrada < 4; tipoEntrada++){
+    //Laço for para repetir os testes por cada tipo de entrada
 
-        // Gera o vetor de acordo com o tipo escolhido
+        // Gera o vetor de acordo com o tipo de entrada
         switch (tipoEntrada) {
-            case 0:
-                vetorOriginal = geraAleatorios(tam, 42); // Gera vetor aleatório
-                printf("\nTipo de Entrada: Vetor Aleatório\n");
+            case 0: // Vetor com elementos gerados aleatoriamente
+                printf("\n------------------------------------------------------------\n");
+                printf("Tipo de Entrada: Vetor Aleatório\n");
+                printf("------------------------------------------------------------\n\n");
                 break;
-            case 1:
+            case 1: // Vetor com alguns elementos desordenados
                 srand(time(NULL));
-                vetorOriginal = geraQuaseOrdenados(tam, 10); // Vetor quase ordenado
-                printf("\nTipo de Entrada: Vetor Quase Ordenado\n");
+                printf("\n------------------------------------------------------------\n");
+                printf("Tipo de Entrada: Vetor Quase Ordenado\n");
+                printf("------------------------------------------------------------\n\n");
                 break;
             case 2:
                 vetorOriginal = geraOrdenados(tam, 0); // Vetor totalmente ordenado crescente
-                printf("\nTipo de Entrada: Vetor Ordenado Crescente\n");
+                printf("\n------------------------------------------------------------\n");
+                printf("Tipo de Entrada: Vetor Ordenado Crescente\n");
+                printf("------------------------------------------------------------\n\n");
                 break;
             case 3:
                 vetorOriginal = geraOrdenados(tam, 1); // Vetor totalmente ordenado decrescente
-                printf("\nTipo de Entrada: Vetor Ordenado Decrescente\n");
+                printf("\n------------------------------------------------------------\n");
+                printf("Tipo de Entrada: Vetor Ordenado Decrescente\n");
+                printf("------------------------------------------------------------\n\n");
                 break;
             default:
                 printf("Opção inválida.\n");
@@ -57,7 +56,9 @@ int main() {
         long long comparacao, troca;
         struct timespec ini, fim; // Variáveis para medir o tempo
         long long duracao;        // Duração em nanosegundos
-        long long media = 0;
+        long long mediaTempo[5] = {0}; // Vetor para armazenar as médias de tempo, cada posição é referente a um algoritmo
+        long long mediaComparacoes[5] = {0}; // Vetor para armazenar as médias de comparacoes, cada posição é referente a um algoritmo
+        long long mediaTrocas[5] = {0}; // Vetor para armazenar as médias de trocas, cada posição é referente a um algoritmo
 
         if(tipoEntrada == 0 || tipoEntrada == 1){
             //Se o vetor for aleatório ou quase ordenado, serão feitas cinco iterações para calcular a média entre elas
@@ -65,9 +66,18 @@ int main() {
         }else{
             iteracoes = 1;
         }
+ 
+        printf("Algoritmo        | Tempo (ns)         | Comparações   | Trocas   \n");
+        printf("---------------------------------------------------------------------\n");
 
         // ---------------------- SELECTION SORT ----------------------
         for(int i = 0; i < iteracoes; i++){
+            if(tipoEntrada == 0){
+                vetorOriginal = geraAleatorios(tam, i);
+            }else if(tipoEntrada == 1){
+                vetorOriginal = geraQuaseOrdenados(tam, 10);
+            }
+
             vetTemp = malloc(sizeof(int) * tam);
             memcpy(vetTemp, vetorOriginal, sizeof(int) * tam); // Copia vetor original para vetTemp
             comparacao = troca = 0;
@@ -83,31 +93,19 @@ int main() {
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
             // Imprime estatísticas
-            printf("SelectionSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            // printf("SelectionSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            printf("%-16s | %15lld ns | %15lld | %10lld\n", "Selection Sort", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
-                media += duracao;
+                // Adiciona os valores na posição indicada na média, para cálculo posterior
+                mediaTempo[0] += duracao;
+                mediaComparacoes[0] += comparacao;
+                mediaTrocas[0] += troca;
             }
 
             free(vetTemp);
 
-            if(tipoEntrada == 0){
-                free(vetorOriginal);
-                vetorOriginal = geraAleatorios(tam, i);
-            }else if(tipoEntrada == 1){
-                free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10);
-            }
-        }
-
-        if(tipoEntrada == 0 || tipoEntrada == 1){
-            media = media/iteracoes;
-            printf("Média de tempo: %lld ns\n", media);
-            media = 0;
-        }
-
         // ---------------------- INSERTION SORT ----------------------
-        for(int i = 0; i < iteracoes; i++){
             vetTemp = malloc(sizeof(int) * tam);
             memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
             comparacao = troca = 0;
@@ -121,31 +119,19 @@ int main() {
             //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-            printf("InsertionSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            // printf("InsertionSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            printf("%-16s | %15lld ns | %15lld | %10lld\n", "Insertion Sort", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
-                media += duracao;
+                // Adiciona os valores na posição indicada na média, para cálculo posterior
+                mediaTempo[1] += duracao;
+                mediaComparacoes[1] += comparacao;
+                mediaTrocas[1] += troca;
             }
 
-            free(vetTemp);
-            
-            if(tipoEntrada == 0){
-                free(vetorOriginal);
-                vetorOriginal = geraAleatorios(tam, i);
-            }else if(tipoEntrada == 1){
-                free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10);
-            }
-        }
-
-        if(tipoEntrada == 0 || tipoEntrada == 1){
-            media = media/iteracoes;
-            printf("Média de tempo: %lld ns\n", media);
-            media = 0;
-        }
+            free(vetTemp);        
 
         // ---------------------- MERGE SORT ----------------------
-        for(int i = 0; i < iteracoes; i++){
             vetTemp = malloc(sizeof(int) * tam);
             memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
             comparacao = troca = 0;
@@ -159,67 +145,47 @@ int main() {
             //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-            printf("MergeSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            // printf("MergeSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            printf("%-16s | %15lld ns | %15lld | %10lld\n", "Merge Sort", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
-                media += duracao;
+                // Adiciona os valores na posição indicada na média, para cálculo posterior
+                mediaTempo[2] += duracao;
+                mediaComparacoes[2] += comparacao;
+                mediaTrocas[2] += troca;
             }
 
-            free(vetTemp);
-            if(tipoEntrada == 0){
-                free(vetorOriginal);
-                vetorOriginal = geraAleatorios(tam, i);
-            }else if(tipoEntrada == 1){
-                free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10);
-            }
-        }
-
-        if(tipoEntrada == 0 || tipoEntrada == 1){
-            media = media/iteracoes;
-            printf("Média de tempo: %lld ns\n", media);
-            media = 0;
-        }
+            free(vetTemp);    
 
         // ---------------------- QUICK SORT ----------------------
-        for(int i = 0; i < iteracoes; i++){
             vetTemp = malloc(sizeof(int) * tam);
             memcpy(vetTemp, vetorOriginal, sizeof(int) * tam);
             comparacao = troca = 0;
 
 
             clock_gettime(CLOCK_MONOTONIC, &ini);//pega o tempo antes de iniciar a função de ordenação
+
             quickSort(vetTemp, 0, tam - 1, &comparacao, &troca);
+
             clock_gettime(CLOCK_MONOTONIC, &fim);//pega o tempo após de iniciar a função de ordenação
 
             // Cálculo da duração
             //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-            printf("QuickSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            // printf("QuickSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            printf("%-16s | %15lld ns | %15lld | %10lld\n", "Quick Sort", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
-                media += duracao;
+                // Adiciona os valores na posição indicada na média, para cálculo posterior
+                mediaTempo[3] += duracao;
+                mediaComparacoes[3] += comparacao;
+                mediaTrocas[3] += troca;
             }
 
             free(vetTemp);
-            if(tipoEntrada == 0){
-                free(vetorOriginal);
-                vetorOriginal = geraAleatorios(tam, i);
-            }else if(tipoEntrada == 1){
-                free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10);
-            }
-        }
-
-        if(tipoEntrada == 0 || tipoEntrada == 1){
-            media = media/iteracoes;
-            printf("Média de tempo: %lld ns\n", media);
-            media = 0;
-        }
 
         // ---------------------- HEAP SORT ----------------------
-        for(int i = 0; i < iteracoes; i++){
             // Aqui, o vetor precisa começar do índice 1
             vetTemp = malloc(sizeof(int) * (tam + 1));
             vetTemp[0] = 0; // índice 0 não utilizado
@@ -230,7 +196,6 @@ int main() {
             }
             comparacao = troca = 0;
 
-
             clock_gettime(CLOCK_MONOTONIC, &ini);//pega o tempo antes de iniciar a função de ordenação
             heapSort(vetTemp, tam, &comparacao, &troca);
             clock_gettime(CLOCK_MONOTONIC, &fim);//pega o tempo após de iniciar a função de ordenação
@@ -239,32 +204,45 @@ int main() {
             //(fim.tv_sec - ini.tv_sec) * 1000000000LL converte o tempo inteiro em segundos para o tempo fracionário em nanosegundos
             duracao = (fim.tv_sec - ini.tv_sec) * 1000000000LL + (fim.tv_nsec - ini.tv_nsec);
 
-            printf("HeapSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            // printf("HeapSort -> Tempo: %lld ns | Comparações: %lld | Trocas: %lld\n", duracao, comparacao, troca);
+            printf("%-16s | %15lld ns | %15lld | %10lld\n", "Heap Sort", duracao, comparacao, troca);
 
             if(tipoEntrada == 0 || tipoEntrada == 1){
-                media += duracao;
+                // Adiciona os valores na posição indicada na média, para cálculo posterior
+                mediaTempo[4] += duracao;
+                mediaComparacoes[4] += comparacao;
+                mediaTrocas[4] += troca;
             }
 
             free(vetTemp);
-            if(tipoEntrada == 0){
-                free(vetorOriginal);
-                vetorOriginal = geraAleatorios(tam, i);
-            }else if(tipoEntrada == 1){
-                free(vetorOriginal);
-                vetorOriginal = geraQuaseOrdenados(tam, 10);
-            }
+        
+            // Libera memória alocada do vetor original
+            free(vetorOriginal);
+
+            printf("\n");
         }
 
         if(tipoEntrada == 0 || tipoEntrada == 1){
-            media = media/iteracoes;
-            printf("Média de tempo: %lld ns\n", media);
-            media = 0;
+            // Calcula a média, caso o tipo de entrada seja Aleatória ou Quase Ordenada
+            for(int i = 0; i < 5; i++){
+                // A média é a soma total pelo número de iterações
+                mediaTempo[i] = mediaTempo[i]/iteracoes;
+                mediaComparacoes[i] = mediaComparacoes[i]/iteracoes;
+                mediaTrocas[i] = mediaTrocas[i]/iteracoes;
+            }
+            // printf("Média de tempo do Selection Sort: %lld ns\n", media[0]);
+            // printf("Média de tempo do Insertion Sort: %lld ns\n", media[1]);
+            // printf("Média de tempo do Merge Sort: %lld ns\n", media[2]);
+            // printf("Média de tempo do Quick Sort: %lld ns\n", media[3]);
+            // printf("Média de tempo do Heap Sort: %lld ns\n", media[4]);
+            printf("---------------------------------------------------------------------------------\n");
+            printf("Algoritmo        | Tempo médio (ns) | Comparações médias | Trocas médias\n");
+            printf("---------------------------------------------------------------------------------\n");
+            for (int i = 0; i < 5; i++) {
+                printf("%-16s | %17lld | %21lld | %16lld\n", nomesAlgoritmos[i], mediaTempo[i], mediaComparacoes[i], mediaTrocas[i]);
+            }
+            printf("---------------------------------------------------------------------------------\n");
         }
-
-        // -------------------------------------------------------
-        
-        // Libera memória alocada do vetor original
-        free(vetorOriginal);
     }   
 
     return 0;
